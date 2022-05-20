@@ -1,13 +1,13 @@
 <?php
 
 # set the environment to DEV if you want debug output
-#define('ENV', 'DEV');
-define('ENV', 'PROD');
+define('ENV', 'DEV');
+#define('ENV', 'PROD');
 
 # add your api base path, starting and ending with a / character
 # use `/` if you want the api to operate on the root directory
 # make sure to insert the same value into the .htaccess file
-define('BASE_PATH', '/api/');
+define('BASE_PATH', '/colamator/api/');
 
 # if you need to connect to a database, uncomment the following lines and
 # add your database config

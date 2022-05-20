@@ -3,7 +3,7 @@
 RewriteEngine On
 
 # api base url, all requests in this directory are handled by DIE
-RewriteBase /api/
+RewriteBase /colamator/api/
 
 # you can make exceptions for directories you want the web server to handle,
 # for example a `public` directory containing css and js. just uncomment the
