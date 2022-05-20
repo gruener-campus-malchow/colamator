@@ -8,7 +8,7 @@ graph ER {
 
   node [shape=ellipse];  name0; name1; username; label; comment; content; timestamp; status; is_standard;
 
-  node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
+  //node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
 
   name0 -- types;
   label -- types;
@@ -27,8 +27,8 @@ graph ER {
   username [label=<<u>username</u>>];
   status [label="last seen"];
 
-  types -- "classifies" [label="1",len=1.00];
-  values -- "classifies" [label="n",len=1.00];
+ // types -- "classifies" [label="1",len=1.00];
+ // values -- "classifies" [label="n",len=1.00];
 
   types -- "references" [label="1",len=1.00];
   values -- "references" [label="n",len=1.00];
