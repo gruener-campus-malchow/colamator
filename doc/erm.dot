@@ -22,8 +22,8 @@ graph ER {
   name1 [label=<<u>name</u>>];
   timestamp [label=<<u>timestamp</u>>];
 
-  username -- gatherer;
-  status -- gatherer;
+  username -- gatherers;
+  status -- gatherers;
   username [label=<<u>username</u>>];
   status [label="last seen"];
 
@@ -33,7 +33,7 @@ graph ER {
   types -- "references" [label="1",len=1.00];
   values -- "references" [label="n",len=1.00];
 
-  gatherer -- "gathers" [label="1",len=1.00];
+  gatherers -- "gathers" [label="1",len=1.00];
   values -- "gathers" [label="n",len=1.00];
 
   label = "\n\nUSER DATABASE\nCollaborative Measurement Network";
