@@ -39,47 +39,45 @@ Colaborative Measurement Network
  ## ERM
  
  ~~~dot
-  graph ER {
-	
-	layout=neato;
-	 //overlap = scale;
-	 overlap = false;
-	
-	node [shape=box]; types; values; gatherer;
+graph ER {
 
-	node [shape=ellipse];  name0; name1; username; label; comment; string; integer; float; timestamp; status;
+  layout=neato;
+   //overlap = scale;
+   overlap = false;
 
-	node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
+  node [shape=box]; types; values; gatherer;
 
-	name0 -- types;
-	label -- types;
-	name0 [label=<<u>name</u>>];
-	
-	name1 -- values;
-	string -- values;
-	integer -- values;
-	float -- values;
-	timestamp -- values;
-	comment -- values;
-	name1 [label=<<u>name</u>>];
-	timestamp [label=<<u>timestamp</u>>];
-	
-	username -- gatherer;
-	status -- gatherer;
-	username [label=<<u>username</u>>];
-	status [label="last seen"];
+  node [shape=ellipse];  name0; name1; username; label; comment; blob; timestamp; status;
 
-	types -- "classifies" [label="1",len=1.00];
-	values -- "classifies" [label="n",len=1.00];
-	
-	types -- "references" [label="1",len=1.00];
-	values -- "references" [label="n",len=1.00];
-	
-	gatherer -- "gathers" [label="1",len=1.00];
-	values -- "gathers" [label="n",len=1.00];
+  node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
 
-	label = "\n\nUSER DATABASE\nCollaborative Measurement Network";
-	fontsize=14;
+  name0 -- types;
+  label -- types;
+  name0 [label=<<u>name</u>>];
+
+  name1 -- values;
+  blob -- values;
+  timestamp -- values;
+  comment -- values;
+  name1 [label=<<u>name</u>>];
+  timestamp [label=<<u>timestamp</u>>];
+
+  username -- gatherer;
+  status -- gatherer;
+  username [label=<<u>username</u>>];
+  status [label="last seen"];
+
+  types -- "classifies" [label="1",len=1.00];
+  values -- "classifies" [label="n",len=1.00];
+
+  types -- "references" [label="1",len=1.00];
+  values -- "references" [label="n",len=1.00];
+
+  gatherer -- "gathers" [label="1",len=1.00];
+  values -- "gathers" [label="n",len=1.00];
+
+  label = "\n\nUSER DATABASE\nCollaborative Measurement Network";
+  fontsize=14;
 }
 ~~~
 
