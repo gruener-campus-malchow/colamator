@@ -4,9 +4,9 @@ graph ER {
    //overlap = scale;
    overlap = false;
 
-  node [shape=box]; types; values; gatherer;
+  node [shape=box]; types; values; gatherers;
 
-  node [shape=ellipse];  name0; name1; username; label; comment; blob; timestamp; status;
+  node [shape=ellipse];  name0; name1; username; label; comment; content; timestamp; status; is_standard;
 
   node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
 
@@ -15,7 +15,8 @@ graph ER {
   name0 [label=<<u>name</u>>];
 
   name1 -- values;
-  blob -- values;
+  content -- values;
+  is_standard -- values;
   timestamp -- values;
   comment -- values;
   name1 [label=<<u>name</u>>];
