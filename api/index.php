@@ -29,7 +29,7 @@ function config_defined()
 
 
 
-//require_once 'lib/DB.php';
+require_once 'lib/DB.php';
 require_once 'lib/Controller.php';
 require_once 'lib/Model.php';
 

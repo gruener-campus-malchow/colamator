@@ -6,11 +6,12 @@ class DB
 	private $connection;
 
 
-	public function __construct($host, $username, $password, $database)
+	//public function __construct($host, $username, $password, $database)
+	public function __construct()
 	{
 		try
 		{
-			$this->connection = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+			$this->connection = new PDO("sqlite:db/database.sqlite");
 		}
 		catch (PDOException $e)
 		{
