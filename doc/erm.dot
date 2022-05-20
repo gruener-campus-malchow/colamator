@@ -1,0 +1,40 @@
+graph ER {
+
+  layout=neato;
+   //overlap = scale;
+   overlap = false;
+
+  node [shape=box]; types; values; gatherer;
+
+  node [shape=ellipse];  name0; name1; username; label; comment; blob; timestamp; status;
+
+  node [shape=diamond,style=filled,color=lightgrey] {"classifies";} 
+
+  name0 -- types;
+  label -- types;
+  name0 [label=<<u>name</u>>];
+
+  name1 -- values;
+  blob -- values;
+  timestamp -- values;
+  comment -- values;
+  name1 [label=<<u>name</u>>];
+  timestamp [label=<<u>timestamp</u>>];
+
+  username -- gatherer;
+  status -- gatherer;
+  username [label=<<u>username</u>>];
+  status [label="last seen"];
+
+  types -- "classifies" [label="1",len=1.00];
+  values -- "classifies" [label="n",len=1.00];
+
+  types -- "references" [label="1",len=1.00];
+  values -- "references" [label="n",len=1.00];
+
+  gatherer -- "gathers" [label="1",len=1.00];
+  values -- "gathers" [label="n",len=1.00];
+
+  label = "\n\nUSER DATABASE\nCollaborative Measurement Network";
+  fontsize=14;
+}
