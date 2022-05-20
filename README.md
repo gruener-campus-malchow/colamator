@@ -1,5 +1,5 @@
 # colamator
-Colaborative Measurement Network
+Collaborative Measurement Network
 
 ## Ziele
 
