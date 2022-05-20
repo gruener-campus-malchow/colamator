@@ -7,7 +7,8 @@ class Controller
 
 	public function __construct()
 	{
-		$this->db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		//$this->db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$this->db = null;
 	}
 
 	// converts CamelCase to snake_case
