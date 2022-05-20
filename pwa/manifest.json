@@ -1,0 +1,23 @@
+{
+    "serviceWorker": true,
+    "name" : "Trainingsplaner",
+    "short_name" : "TPlaner",
+    "start_url" : ".",
+    "background_color" : "#004d66",
+    "theme_color" : "#1ac6ff",
+    "display" : "standalone",
+    "icons" : [
+        {
+            "src" : "defeat.png",
+            "sizes" : "192x192",
+            "type" : "image/png",
+            "purpose": "any"
+        },
+        {
+            "src" : "defeat512.png",
+            "sizes" : "512x512",
+            "type" : "image/png",
+            "purpose": "any"  
+        }
+    ]
+}
