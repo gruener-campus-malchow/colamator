@@ -51,7 +51,7 @@ const deviceType = () => {
 };
 
 fetch('/api/users/', {
-  method: 'GET',
+  method: 'GET'
   //body: JSON.stringify({color: 'deine', type: 'mutter'})
 })
 .then(response => response.json())

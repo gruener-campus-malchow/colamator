@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (count($_SESSION) != 0) {
+	if ($_SESSION) {
 		$achne = $_SESSION["username"];
 	} else {
 		$achne = "Login";
@@ -46,4 +46,8 @@
 		</div>
     </header>
 		<div id="aha">aha</div>
+		<form action="upload.js">
+			<label for="data">Data</label><br>
+  		<input type="text" id="data" name="data">
+		</form>
 </body>
