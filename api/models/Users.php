@@ -37,8 +37,8 @@ class Users extends Model
 	public function createSingle($data)
 	{
 		
-		if (!isset($data['username'])) return $this->api_response('Username missing', 400);
-		if (!isset($data['password'])) return $this->api_response('Password missing', 400);
+		if (!isset($data['username'])) return $this->api_response('username missing', 400);
+		if (!isset($data['password'])) return $this->api_response('password missing', 400);
 		$path = 'db/users/'.$data['username'].'.sqlite';
 		if (file_exists($path)) return $this->api_response('Username already exists', 409);
 		
@@ -73,8 +73,8 @@ class Users extends Model
 		//echo"sdfg";
 		switch ($identifier){
 			case "login":
-				if (!isset($data['username'])) return $this->api_response('Username missing', 400);
-				if (!isset($data['password'])) return $this->api_response('Password missing', 400);
+				if (!isset($data['username'])) return $this->api_response('username missing', 400);
+				if (!isset($data['password'])) return $this->api_response('password missing', 400);
 				$path = 'db/users/'.$data['username'].'.sqlite';
 				if (file_exists($path)){
 					$userDB = new PDO('sqlite:'.$path);
@@ -88,8 +88,22 @@ class Users extends Model
 				$_SESSION['username'] = $data['username']:
 				return $this->api_response('login successfull');
 			case "add_device_key":
-				if (!isset($data['username'])) return $this->api_response('Username missing', 400);
-				if (!isset($data['password'])) return $this->api_response('Password missing', 400);
+				if (!isset($data['username'])) return $this->api_response('username missing', 400);
+				if (!isset($data['device_key'])) return $this->api_response('device key missing', 400);
+				$path = 'db/users/'.$data['username'].'.sqlite';
+				
+				# ab hier weiter machen
+				if (file_exists($path)){
+					$userDB = new PDO('sqlite:'.$path);
+					$result = $userDB->query("SELECT hash FROM gatherers WHERE username='me'");
+				
+				$stored_hash = $result->fetch()['hash'];
+				
+				if (!password_verify($data['password'], $stored_hash)) {
+					return $this->api_response('password does not match', 401);
+				}
+				$_SESSION['username'] = $data['username']:
+				return $this->api_response('login successfull');
 		
 		}
 		
