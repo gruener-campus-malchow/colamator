@@ -50,7 +50,7 @@ const deviceType = () => {
     return "desktop";
 };
 
-fetch('/api/items/', {
+fetch('/api/users/', {
   method: 'GET',
   //body: JSON.stringify({color: 'deine', type: 'mutter'})
 })
@@ -67,8 +67,10 @@ window.addEventListener('appinstalled', (evt) => {
       const token = currentToken;
       fetch('/api/users/add_device_key', {
         method: 'POST',
-        body: JSON.stringify({name:'Brian Cohen',device_key: token , device_name: deviceType})
+        body: JSON.stringify({username:'lorenzo',device_key: token , device_name: deviceType()})
       })
+      .then(response => response.text())
+      .then(console.log);
     } else {
       console.log("nops");
     }
