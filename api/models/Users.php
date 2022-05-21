@@ -27,14 +27,12 @@ class Users extends Model
 		
 	}
 
-
 	public function getAttribute($identifier, $attribute)
 	{
 		if (!$result) $this->api_response('Item Does Not Exist', 404);
 		// else, return the attribute; the [0] is needed since the result is wrapped in an array
 		else $this->api_response($result[0][$attribute]);
 	}
-
 
 	public function createSingle($data)
 	{
@@ -45,13 +43,19 @@ class Users extends Model
 		
 		$sql = file_get_contents(__DIR__.'/createUser.sql');
 		
+		$sql = array_filter(explode(';',$sql));
+		
 		$userDB = new PDO('sqlite:'.$path);
-		$statement = $userDB->query($sql);
-				
-		if ($statement->errorCode() == 0) $this->api_response('');
-		else $this->api_response($statement->errorInfo());
+		
+		foreach ($sql as $statement){
+			//var_dump($statement);
+			$result = $userDB->query($statement);
+			
+			if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+		}
+		$this->api_response('');
 	}
-
+	
 
 	public function updateSingle($identifier, $data)
 	{
@@ -59,7 +63,6 @@ class Users extends Model
 		// execute the query
 		//$this->api_response($this->db->query("UPDATE $this->name SET $updates WHERE $this->id = ?", $values));
 	}
-
 
 	public function replaceSingle($identifier, $data)
 	{

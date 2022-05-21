@@ -5,7 +5,8 @@ CREATE TABLE types (
 
 CREATE TABLE gatherers (
 	username TEXT PRIMARY KEY,
-	last_seen INT DEFAULT CURRENT_TIMESTAMP
+	last_seen INT DEFAULT CURRENT_TIMESTAMP,
+	hash TEXT
 );
 
 CREATE TABLE 'values' (
