@@ -15,14 +15,14 @@ CREATE TABLE 'values' (
 	timestamp INTEGER DEFAULT CURRENT_TIMESTAMP,
 	content BLOB,
 	is_standard INTEGER,
-	typeID TEXT NOT NULL,
-	gathererID TEXT NOT NULL,
-	FOREIGN KEY (typeID) REFERENCES types(name),
-	FOREIGN KEY (gathererID) REFERENCES gatherers(username)
+	type_id TEXT NOT NULL,
+	gatherer_id TEXT NOT NULL,
+	FOREIGN KEY (type_id) REFERENCES types(name),
+	FOREIGN KEY (gatherer_id) REFERENCES gatherers(username)
 );
 
 CREATE TABLE 'devices' (
 	'name' TEXT PRIMARY KEY,
 	last_used INTEGER DEFAULT CURRENT_TIMESTAMP,
-	DeviceID TEXT NOT NULL
+	device_id TEXT NOT NULL
 );

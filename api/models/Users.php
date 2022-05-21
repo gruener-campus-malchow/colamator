@@ -39,7 +39,7 @@ class Users extends Model
 
 		if (!isset($data['username'])) return $this->api_response('username missing', 400);
 		if (!isset($data['password'])) return $this->api_response('password missing', 400);
-		if (!preg_match('/^[a-zA-Z0-9-_]$/', $data['username']))  return $this->api_response('Invalid characters in username', 400);
+		if (!preg_match('/^[a-zA-Z0-9-_]{4,32}$/', $data['username']))  return $this->api_response('Invalid characters in username', 400);
 		$path = 'db/users/'.$data['username'].'.sqlite';
 		if (file_exists($path)) return $this->api_response('Username already exists', 409);
 
@@ -81,30 +81,29 @@ class Users extends Model
 					$userDB = new PDO('sqlite:'.$path);
 					$result = $userDB->query("SELECT hash FROM gatherers WHERE username='me'");
 
-				$stored_hash = $result->fetch()['hash'];
+					$stored_hash = $result->fetch()['hash'];
 
-				if (!password_verify($data['password'], $stored_hash)) {
-					return $this->api_response('password does not match', 401);
+					if (!password_verify($data['password'], $stored_hash)) {
+						return $this->api_response('password does not match', 401);
+					}
+					$_SESSION['username'] = $data['username'];
+					return $this->api_response('login successfull');
 				}
-				$_SESSION['username'] = $data['username']:
-				return $this->api_response('login successfull');
+				break;
 			case "add_device_key":
 				if (!isset($data['username'])) return $this->api_response('username missing', 400);
 				if (!isset($data['device_key'])) return $this->api_response('device key missing', 400);
+				if (!isset($data['device_name'])) return $this->api_response('device name missing', 400);
 				$path = 'db/users/'.$data['username'].'.sqlite';
 
 				# ab hier weiter machen
 				if (file_exists($path)){
 					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("SELECT hash FROM gatherers WHERE username='me'");
-
-				$stored_hash = $result->fetch()['hash'];
-
-				if (!password_verify($data['password'], $stored_hash)) {
-					return $this->api_response('password does not match', 401);
+					$result = $userDB->query("INSERT INTO devices (name, device_id) VALUES ('".$data['device_name']."','".$data['device_key']."')");
+					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+					$this->api_response('added a device');
 				}
-				$_SESSION['username'] = $data['username']:
-				return $this->api_response('login successfull');
+				
 
 		}
 
