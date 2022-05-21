@@ -38,6 +38,7 @@ class Users extends Model
 	{
 		
 		if (!isset($data['username'])) return $this->api_response('Username missing', 400);
+		if (!isset($data['password'])) return $this->api_response('Password missing', 400);
 		$path = 'db/users/'.$data['username'].'.sqlite';
 		if (file_exists($path)) return $this->api_response('Username already exists', 409);
 		
@@ -53,12 +54,45 @@ class Users extends Model
 			
 			if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
 		}
+		
+		
+		$hash = password_hash($data['password'], PASSWORD_DEFAULT);
+		
+		$query = 'INSERT INTO gatherers (username, hash) VALUES ("me","'.$hash.'");';
+		
+		$result = $userDB->query($query);
+		if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+		//echo $hash;
+		//final OK
 		$this->api_response('');
 	}
 	
 
 	public function updateSingle($identifier, $data)
 	{
+		//echo"sdfg";
+		switch ($identifier){
+			case "login":
+				if (!isset($data['username'])) return $this->api_response('Username missing', 400);
+				if (!isset($data['password'])) return $this->api_response('Password missing', 400);
+				$path = 'db/users/'.$data['username'].'.sqlite';
+				if (file_exists($path)){
+					$userDB = new PDO('sqlite:'.$path);
+					$result = $userDB->query("SELECT hash FROM gatherers WHERE username='me'");
+				
+				$stored_hash = $result->fetch()['hash'];
+				
+				if (!password_verify($data['password'], $stored_hash)) {
+					return $this->api_response('password does not match', 401);
+				}
+				$_SESSION['username'] = $data['username']:
+				return $this->api_response('login successfull');
+			case "add_device_key":
+				if (!isset($data['username'])) return $this->api_response('Username missing', 400);
+				if (!isset($data['password'])) return $this->api_response('Password missing', 400);
+		
+		}
+		
 		
 		// execute the query
 		//$this->api_response($this->db->query("UPDATE $this->name SET $updates WHERE $this->id = ?", $values));

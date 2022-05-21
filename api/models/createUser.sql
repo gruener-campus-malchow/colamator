@@ -6,7 +6,7 @@ CREATE TABLE types (
 CREATE TABLE gatherers (
 	username TEXT PRIMARY KEY,
 	last_seen INT DEFAULT CURRENT_TIMESTAMP,
-	hash TEXT
+	hash TEXT NOT NULL
 );
 
 CREATE TABLE 'values' (
@@ -19,4 +19,10 @@ CREATE TABLE 'values' (
 	gathererID TEXT NOT NULL,
 	FOREIGN KEY (typeID) REFERENCES types(name),
 	FOREIGN KEY (gathererID) REFERENCES gatherers(username)
+);
+
+CREATE TABLE 'devices' (
+	'name' TEXT PRIMARY KEY,
+	last_used INTEGER DEFAULT CURRENT_TIMESTAMP,
+	DeviceID TEXT NOT NULL
 );
