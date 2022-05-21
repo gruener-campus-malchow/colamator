@@ -1,7 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "atom";
-$password = "Emil1@1@";
+
 
 try {
   $conn = new PDO("mysql:host=$servername;port=3306;dbname=users", $username, $password);
@@ -10,4 +9,3 @@ try {
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
-?>

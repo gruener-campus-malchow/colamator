@@ -29,6 +29,7 @@ body {
 }
 /* Style the links inside the navigation bar */
 .topnav a {
+  flex-grow: 1;
   font-weight: 900;
   color: white;
   text-align: center;

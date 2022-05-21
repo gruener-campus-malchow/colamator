@@ -6,22 +6,32 @@
 		$achne = "Login";
 	}
 ?>
+<!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta charset="UTF-8" />
-	<title> The Hub </title>
+	<meta name="theme-color" content="#1ac6ff">
+	<title >Trainings-Planer</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="defeat.png">
+	<script language="javascript" type="text/javascript" src="index.js"></script>
  </head>
 <body>
-	<script type="module" src="./main.js"></script>
+	<script type="text/javascript">
+	if ('serviceWorker' in navigator) {
+	try {
+		navigator.serviceWorker.register('./sw.js');
+	} catch (error) {
+		console.error(`Registration failed with ${error}`);
+	}
+	}
+	</script>
     <header>
         <div class="topnav">
 	    	<div class="kartoffel"><img src="kartoffelpc.png" style="width:4vw;height:4vw;" /></div>
-            	<a class="active" href="index.php">Home</a>
-            	<a href="projects.html">Projects</a>
-            	<a href="info.html">Info</a>
-				<a href="sources.html">Sources</a>
-				<a href="webapp.php">Trainingsplaner</a>
+        <a class="active" href="index.php">Home</a>
+        <a href="projects.html">Diagramme</a>
 				<a href="./login/login.php">
 					<?php
 						echo($achne);
@@ -35,4 +45,5 @@
   			<a href="#about">About</a>
 		</div>
     </header>
+		<div id="aha">aha</div>
 </body>
