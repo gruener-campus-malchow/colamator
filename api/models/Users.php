@@ -75,71 +75,12 @@ class Users extends Model
 			case "login":
 				if (!isset($data['username'])) return $this->api_response('username missing', 400);
 				if (!isset($data['password'])) return $this->api_response('password missing', 400);
-				$path = 'db/users/'.$data['username'].'.sqlite';
-				if (file_exists($path)){
-					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("SELECT hash FROM gatherers WHERE username='me'");
+				if (Auth::login($data['username'], $data['password'])) return $this->api_response('login successful');
+				else return $this->api_response('login failed', 400); // TODO: more detailed error responses
 
-					$stored_hash = $result->fetch()['hash'];
-
-					if (!password_verify($data['password'], $stored_hash)) {
-						return $this->api_response('password does not match', 401);
-					}
-					$_SESSION['username'] = $data['username'];
-					return $this->api_response('login successfull');
-				}
-				break;
-			case "add_device_key":
-				if (!isset($data['username'])) return $this->api_response('username missing', 400);
-				if (!isset($data['device_key'])) return $this->api_response('device key missing', 400);
-				if (!isset($data['device_name'])) return $this->api_response('device name missing', 400);
-				$path = 'db/users/'.$data['username'].'.sqlite';
-		
-				if (file_exists($path)){
-					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("INSERT INTO devices (name, device_id) VALUES ('".$data['device_name']."','".$data['device_key']."')");
-					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
-					return $this->api_response('added a device');
-				}
-				break;
-			case "datatypes":
-				
-				if (!isset($data['username'])) return $this->api_response('username missing', 400);
-				$path = 'db/users/'.$data['username'].'.sqlite';
-
-				if (file_exists($path)){
-					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("SELECT 'name', label FROM types");
-					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
-					return $this->api_response($result->fetchAll());
-				}
-				break;
-			case "get_device_key":
-				
-				if (!isset($data['username'])) return $this->api_response('username missing', 400);
-				$path = 'db/users/'.$data['username'].'.sqlite';
-
-				if (file_exists($path)){
-					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("SELECT 'name', label FROM types");
-					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
-					return $this->api_response($result->fetchAll());
-				}
-				break;
-			case "datatypes":
-				
-				if (!isset($data['username'])) return $this->api_response('username missing', 400);
-				$path = 'db/users/'.$data['username'].'.sqlite';
-
-				if (file_exists($path)){
-					$userDB = new PDO('sqlite:'.$path);
-					$result = $userDB->query("SELECT 'name', label FROM types");
-					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
-					return $this->api_response($result->fetchAll());
-				}
-				break;
-				
-
+			case 'logout':
+				Auth::logout();
+				return $this->api_response('logout successful');
 		}
 
 
