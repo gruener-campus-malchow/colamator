@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
-class Users
+class Messages
 {
 
 	private $head;
@@ -24,7 +24,36 @@ class Users
         $this->foot = "</body></html>";
 
         $this->body = "";
-        }
+        if (!isset($_GET ["action"])) $_GET ["action"]='';
+        switch ($_GET ["action"]){
+			case "login":
+				echo "login";
+				$this->login();
+				
+				$this->createMessage();
+			break;
+			case "speichern":
+				echo "speichern";
+			break;
+			case "senden":
+				
+				$this->sendMessage();
+				$this->createMessage();
+			break;
+			case "sparen":
+				echo "sparen";
+			break;
+			case "foo":
+			break;
+			default:
+				echo "default";
+				
+				$this->welcome();
+				
+			break;
+			}
+        
+    }
 	public function getHtml()
     {
         return $this->head . $this->body . $this->foot;    
@@ -66,10 +95,15 @@ class Users
 		}
 		return $html;
 	}
-    public function adduser()
+	private function login()
+	{
+		echo "don't forget to make authentification";
+				$_SESSION['username']=$_GET['me'];
+	}
+    private function welcome()
     {
 		$this->body .='
-		
+		<h1>Hello boys and girls!</h1h1>
 			<form>
 			<label>me:
 				<select name=me>';
@@ -78,19 +112,44 @@ class Users
 		$this->body .='
 				
 				</select></label>
-				<label>datatyps:
-				<select name=datatyp>';
-		$this->body .= $this->getdatatyp(['username' => $_GET['me']]);
+				<input type=password name=passphrase>
+				<input type=submit name=action value=login>
+
 				
-		$this->body .='
-				
-				</select></label>
-				<textarea name =users size=1000></textarea>
-				<input type=submit name=ok value=senden>
 			</form>';
 		
 		
 	}
+	private function sendMessage(){
+		$message['datatype'] = $_GET['datatyp'];
+		$message['content'] = $_GET['message'];
+		$html = json_decode($this->postdata($message, 'users/message'));
+		
+		return $html;
+		}
+	private function createMessage()
+    {
+		$this->body .='
+		
+			<form>
+				<label>datatyps:
+				<select name=datatyp>';
+		$this->body .= $this->getdatatyp(['username' => $_SESSION['username']]);
+				
+		$this->body .='
+				
+				</select></label>
+				<textarea name =message size=1000></textarea>
+				<input type=submit name=action value=senden>
+				<input type=submit name=action value=speichern>
+				<input type=submit name=action value=sparen>
+
+				
+			</form>';
+		
+		
+	}
+	
 	public function con()
 	{
 	$pwd = array_filter(explode(';', $_GET['users']));
@@ -122,7 +181,7 @@ class Users
 	//print_r($feld);
 		
 }
-$new = new Users('user');
-$new -> adduser();
+$new = new Messages('Messages');
+//$new -> adduser();
 //$new -> con();
 echo $new -> getHtml();
