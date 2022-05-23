@@ -3,20 +3,20 @@
 class DB
 {
 
-	private $connection;
+	private $connection, $auth;
 
-
-	//public function __construct($host, $username, $password, $database)
-	public function __construct()
+	public function __construct($path)
 	{
 		try
 		{
-			$this->connection = new PDO("sqlite:db/database.sqlite");
+			$this->connection = new PDO("sqlite:$path");
 		}
 		catch (PDOException $e)
 		{
 			if (ENV == 'DEV') echo 'Connection failed: ' . $e->getMessage();
 		}
+
+		$this->auth = new Auth();
 	}
 
 
