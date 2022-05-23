@@ -1,5 +1,6 @@
 {
     "serviceWorker": true,
+    "gcm_sender_id": "395109243028",
     "name" : "Trainingsplaner",
     "short_name" : "TPlaner",
     "start_url" : ".",
