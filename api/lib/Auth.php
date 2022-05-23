@@ -13,7 +13,7 @@ class Auth
 
 	public static function getUser()
 	{
-		if (isset($_SESSION['user'])) return $_SESSION['user'];
+		if (isset($_SESSION['username'])) return $_SESSION['username'];
 		return false;
 	}
 
@@ -28,13 +28,13 @@ class Auth
 
 		if (!password_verify($password, $hash)) return false;
 
-		$_SESSION['user'] = $name;
+		$_SESSION['username'] = $name;
 		return true;
 	}
 
 	public static function logout()
 	{
-		$_SESSION['user'] = null;
+		$_SESSION['username'] = null;
 	}
 
 }
