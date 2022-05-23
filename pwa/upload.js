@@ -1,4 +1,3 @@
-data = document.getElementById('data');
 var datatype;
 if (typeof data == number & data > 30 & data < 200) {
   datatype = "Gewicht";

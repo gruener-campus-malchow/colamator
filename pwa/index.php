@@ -46,7 +46,7 @@
 		</div>
     </header>
 		<div id="aha">aha</div>
-		<form action="upload.js">
+		<form action="submit">
 			<label for="data">Data</label><br>
   		<input type="text" id="data" name="data">
 		</form>
