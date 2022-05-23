@@ -8,9 +8,20 @@ class Controller
 	public function __construct()
 	{
 		//$this->db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-		$this->db = new DB('db/database.sqlite');
+		//$this->db = new DB('db/database.sqlite');
 
 		Auth::init();
+		$user = Auth::getUser();
+		if ($user)
+		{
+			$db_path = USER_DB_DIR."$user.sqlite";
+			$this->db = new DB($db_path);
+		}
+		elseif (true) // shout out to noyavy
+		{
+			// idk, some fallback option
+			$this->db = new DB('db/database.sqlite');
+		}
 	}
 
 	// converts CamelCase to snake_case
