@@ -126,6 +126,18 @@ class Users extends Model
 					return $this->api_response($result->fetchAll());
 				}
 				break;
+			case "datatypes":
+				
+				if (!isset($data['username'])) return $this->api_response('username missing', 400);
+				$path = 'db/users/'.$data['username'].'.sqlite';
+
+				if (file_exists($path)){
+					$userDB = new PDO('sqlite:'.$path);
+					$result = $userDB->query("SELECT 'name', label FROM types");
+					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+					return $this->api_response($result->fetchAll());
+				}
+				break;
 				
 
 		}
