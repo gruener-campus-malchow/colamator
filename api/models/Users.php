@@ -65,13 +65,12 @@ class Users extends Model
 		if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
 		//echo $hash;
 		//final OK
-		$this->api_response('');
+		$this->api_response('user created');
 	}
 
 
 	public function updateSingle($identifier, $data)
 	{
-		//echo"sdfg";
 		switch ($identifier){
 			case "login":
 				if (!isset($data['username'])) return $this->api_response('username missing', 400);
@@ -95,14 +94,38 @@ class Users extends Model
 				if (!isset($data['device_key'])) return $this->api_response('device key missing', 400);
 				if (!isset($data['device_name'])) return $this->api_response('device name missing', 400);
 				$path = 'db/users/'.$data['username'].'.sqlite';
-
-				# ab hier weiter machen
+		
 				if (file_exists($path)){
 					$userDB = new PDO('sqlite:'.$path);
 					$result = $userDB->query("INSERT INTO devices (name, device_id) VALUES ('".$data['device_name']."','".$data['device_key']."')");
 					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
-					$this->api_response('added a device');
+					return $this->api_response('added a device');
 				}
+				break;
+			case "datatypes":
+				
+				if (!isset($data['username'])) return $this->api_response('username missing', 400);
+				$path = 'db/users/'.$data['username'].'.sqlite';
+
+				if (file_exists($path)){
+					$userDB = new PDO('sqlite:'.$path);
+					$result = $userDB->query("SELECT 'name', label FROM types");
+					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+					return $this->api_response($result->fetchAll());
+				}
+				break;
+			case "get_device_key":
+				
+				if (!isset($data['username'])) return $this->api_response('username missing', 400);
+				$path = 'db/users/'.$data['username'].'.sqlite';
+
+				if (file_exists($path)){
+					$userDB = new PDO('sqlite:'.$path);
+					$result = $userDB->query("SELECT 'name', label FROM types");
+					if ($userDB->errorCode() != "00000") return $this->api_response($userDB->errorInfo(),500);
+					return $this->api_response($result->fetchAll());
+				}
+				break;
 				
 
 		}

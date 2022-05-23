@@ -3,6 +3,8 @@ CREATE TABLE types (
 	label TEXT
 );
 
+INSERT INTO types ('name', label) VALUES ('foo','foobar'),('bullshit','alles was...');
+
 CREATE TABLE gatherers (
 	username TEXT PRIMARY KEY,
 	last_seen INT DEFAULT CURRENT_TIMESTAMP,

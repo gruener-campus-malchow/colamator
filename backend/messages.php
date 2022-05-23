@@ -28,15 +28,67 @@ class Users
 	public function getHtml()
     {
         return $this->head . $this->body . $this->foot;    
-    }  
+    } 
+    
+    private function postdata($data, $entrypoint) {
+		$data_string = json_encode($data);
+		$result = file_get_contents('https://schwarzbrotrock.org/api/'.$entrypoint, null, stream_context_create(array(
+		'http' => array(
+		'method' => 'POST',
+		'header' => array('Content-Type: application/json'."\r\n"
+		//. 'Authorization: username:key'."\r\n"
+		. 'Content-Length: ' . strlen($data_string) . "\r\n"),
+		'content' => $data_string)
+		)
+		));
+		return $result;
+	}
+	
+	
+	private function getdata($entrypoint) {
+		return file_get_contents('https://schwarzbrotrock.org/api/'.$entrypoint);
+	}
+	
+	
+	private function getsender(){
+		$alotofsenders = json_decode($this->getdata('users/'));
+		$html='';
+		foreach ($alotofsenders as $sender){
+			$html .= '<option>'.$sender.'</option>';
+		}
+		return $html;
+	}
+	private function getdatatyp($data){
+		$alotofsenders = json_decode($this->postdata($data, 'users/datatypes'));
+		$html='';
+		foreach ($alotofsenders as $sender){
+			$html .= '<option>'.$sender->label.'</option>';
+		}
+		return $html;
+	}
     public function adduser()
     {
 		$this->body .='
+		
 			<form>
+			<label>me:
+				<select name=me>';
+		$this->body .= $this->getsender();
+				
+		$this->body .='
+				
+				</select></label>
+				<label>datatyps:
+				<select name=datatyp>';
+		$this->body .= $this->getdatatyp(['username' => $_GET['me']]);
+				
+		$this->body .='
+				
+				</select></label>
 				<textarea name =users size=1000></textarea>
 				<input type=submit name=ok value=senden>
 			</form>';
-		$this->body .=print_r($_GET['users'],True);
+		
 		
 	}
 	public function con()
@@ -72,5 +124,5 @@ class Users
 }
 $new = new Users('user');
 $new -> adduser();
-$new -> con();
+//$new -> con();
 echo $new -> getHtml();
