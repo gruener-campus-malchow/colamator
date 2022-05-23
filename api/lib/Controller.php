@@ -9,6 +9,8 @@ class Controller
 	{
 		//$this->db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$this->db = new DB('db/database.sqlite');
+
+		Auth::init();
 	}
 
 	// converts CamelCase to snake_case
