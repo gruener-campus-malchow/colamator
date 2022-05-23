@@ -12,7 +12,7 @@ class DB
 		{
 			try
 			{
-				$this->singletons[$path] = new PDO("sqlite:$path");
+				self::$singletons[$path] = new PDO("sqlite:$path");
 			}
 			catch (PDOException $e)
 			{
