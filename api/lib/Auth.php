@@ -1,6 +1,6 @@
 <?php
 
-static class Auth
+class Auth
 {
 
 	public static function init()
