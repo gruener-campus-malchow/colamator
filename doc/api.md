@@ -6,35 +6,45 @@ Eine API erlaubt außerdem, dass zukünftig weitere Dienste, wie z.B. eine Wette
 
 ## API Endpoints
 
-### POST
+### GET /api/users/
 
-#### /api/users/datatypes
+Listet alle ~~user~~ gatherer
 
-Liefert Datentypen, die für einen Benutzer festegelegt sind
+### POST /api/users/
 
-body: {"username":"maxmustermann"}
-response: {...}
+erzeugt einen neuen ~~user~~ gatherer
 
-#### /api/users/
+body: `{"password":"strenggeheim", "username":"maxmustermann"}` \
+response: `"username missing"` oder `"password missing"` oder `"Username already exists"` oder `"user created"`
 
-erzeugt einen neuen user
-
-body: {"password":"strenggeheim", "username":"maxmustermann"}
-response: {...}
-
-#### /api/users/login
+### POST /api/users/login
 
 loggt einen benutzer ein
 
-body: {"password":"strenggeheim", "username":"maxmustermann"}
-response: {...}
+body: `{"password":"strenggeheim", "username":"maxmustermann"}` \
+response: `"username missing"` oder `"password missing"` oder `"login successful"` oder `"login failed"`
 
-#### /api/users/add_device_key
+### POST /api/users/logout
+
+loggt einen benutzer aus
+
+response: `"logout successful"`
+
+### GET /api/datatypes/ [R]
+
+Liefert Datentypen, die für einen Benutzer festegelegt sind
+
+response: `[{…}, …]`
+
+### GET /api/devices/ [R]
+
+Liefert Devices, die für einen Benutzer festegelegt sind
+
+response: `[{…}, …]`
+
+### POST /api/devices/ [R]
 
 hinterlegt pro benutzer einen device-key für push-notifikationen
 
-body: {"username":"maxmustermann","device_key":"sdfg","device_name":"my "}
-response: {...}
-
-### GET
-
+body: `{"device_id":"sdfg","name":"my device"}` \
+response: `0` bei Fehlern, sonst den Index (A_I) des devices
