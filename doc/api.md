@@ -48,3 +48,5 @@ hinterlegt pro benutzer einen device-key für push-notifikationen
 
 body: `{"device_id":"sdfg","name":"my device"}` \
 response: `0` bei Fehlern, sonst den Index (A_I) des devices
+
+**[R] nur für angemeldete user verfügbar**
