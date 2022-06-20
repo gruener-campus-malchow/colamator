@@ -3,7 +3,7 @@
 	if ($_SESSION) {
 		$achne = $_SESSION["username"];
 	} else {
-		$achne = "Login";
+		$achne = "Unknown";
 	}
 ?>
 <!DOCTYPE html>
@@ -31,13 +31,13 @@
     <header>
         <div class="topnav">
 	    	<div class="kartoffel"><img src="kartoffelpc.png" style="width:4vw;height:4vw;" /></div>
-        	<a class="active" href="index.php">Home</a>
-        	<a href="projects.html"><img src="statistics.png" style="width:4vw;height:4vw;"></a>
-			<a href="./login/login.php">
+        	<a href="./login/login.php">
 				<?php
 					echo($achne);
 				?>
 			</a>
+        	<a href="projects.html"><img src="statistics.png" style="width:4vw;height:4vw;"></a>
+			<a href="settings.html"><img src="settings.png" style="width:4vw;height:4vw;"></a>
 		</div>
 		<div class="topnav2">
  	 		<a href="basicidea.html">Basic Idea</a>
