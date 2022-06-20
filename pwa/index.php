@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <head>
 	<link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta charset="UTF-8" />
 	<meta name="theme-color" content="#1ac6ff">
@@ -31,14 +31,14 @@
     <header>
         <div class="topnav">
 	    	<div class="kartoffel"><img src="kartoffelpc.png" style="width:4vw;height:4vw;" /></div>
-        <a class="active" href="index.php">Home</a>
-        <a href="projects.html">Diagramme</a>
-				<a href="./login/login.php">
-					<?php
-						echo($achne);
-					?>
-				</a>
-			</div>
+        	<a class="active" href="index.php">Home</a>
+        	<a href="projects.html"><img src="statistics.png" style="width:4vw;height:4vw;"></a>
+			<a href="./login/login.php">
+				<?php
+					echo($achne);
+				?>
+			</a>
+		</div>
 		<div class="topnav2">
  	 		<a href="basicidea.html">Basic Idea</a>
   			<a href="news.html">News</a>
