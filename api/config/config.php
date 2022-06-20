@@ -9,6 +9,9 @@ define('ENV', 'DEV');
 # make sure to insert the same value into the .htaccess file
 define('BASE_PATH', '/api/');
 
+define('DB_DIR', 'db/');
+define('USER_DB_DIR', DB_DIR.'users/');
+
 # if you need to connect to a database, uncomment the following lines and
 # add your database config
 #define('DB_NAME', 'my_database');

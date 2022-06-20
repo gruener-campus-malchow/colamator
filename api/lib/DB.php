@@ -4,19 +4,24 @@ class DB
 {
 
 	private $connection;
+	private static $singletons = [];
 
-
-	//public function __construct($host, $username, $password, $database)
-	public function __construct()
+	public function __construct($path)
 	{
-		try
+		if (!array_key_exists($path, self::$singletons))
 		{
-			$this->connection = new PDO("sqlite:db/database.sqlite");
+			try
+			{
+				self::$singletons[$path] = new PDO("sqlite:$path");
+			}
+			catch (PDOException $e)
+			{
+				if (ENV == 'DEV') echo 'Connection failed: ' . $e->getMessage();
+				return;
+			}
 		}
-		catch (PDOException $e)
-		{
-			if (ENV == 'DEV') echo 'Connection failed: ' . $e->getMessage();
-		}
+
+		$this->connection = self::$singletons[$path];
 	}
 
 
@@ -45,6 +50,8 @@ class DB
 
 	public function getLastInsertId()
 	{
+		if (!isset($this->connection)) return false;
+
 		$id = $this->connection->lastInsertId();
 		if (is_numeric($id)) $id = $id + 0;
 		return $id;

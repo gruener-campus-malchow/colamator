@@ -33,8 +33,11 @@ Collaborative Measurement Network
 * diverse Datenbanken
   * SQLITE
   * Je Benutzer eine (Idee: Eigene Datenanfragen möglich)
-  * Für Collaboration/Chat eine
+  * Für Collaboration/Chat eine?
+  * Collaborationen in Gatherer-Tabelle?
   * Merging?
+  
+[API Dokumentation](./doc/api.md)
   
 ## ERM
  
@@ -43,37 +46,3 @@ Collaborative Measurement Network
 # MVC-Adaption
 
 ![MVC](./doc/mvc.svg)
-
-## API Endpoints
-
-### POST
-
-#### /api/users/datatypes
-
-Liefert Datentypen, die für einen Benutzer festegelegt sind
-
-body: {"username":"maxmustermann"}
-response: {...}
-
-#### /api/users/
-
-erzeugt einen neuen user
-
-body: {"password":"strenggeheim", "username":"maxmustermann"}
-response: {...}
-
-#### /api/users/login
-
-loggt einen benutzer ein
-
-body: {"password":"strenggeheim", "username":"maxmustermann"}
-response: {...}
-
-#### /api/users/add_device_key
-
-hinterlegt pro benutzer einen device-key für push-notifikationen
-
-body: {"username":"maxmustermann","device_key":"sdfg","device_name":"my "}
-response: {...}
-
-### GET

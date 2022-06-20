@@ -16,6 +16,7 @@
 	<title >Trainings-Planer</title>
 	<link rel="apple-touch-icon" href="defeat.png">
 	<script language="javascript" type="module" src="index.js"></script>
+	<script language="javascript" type="module" src="upload.js"></script>
  </head>
 <body>
 	<script type="module">
@@ -46,8 +47,9 @@
 		</div>
     </header>
 		<div id="aha">aha</div>
-		<form action="submit">
+		<form>
 			<label for="data">Data</label><br>
   		<input type="text" id="data" name="data">
+			<input type="submit" value="submit" id="upload">
 		</form>
 </body>
