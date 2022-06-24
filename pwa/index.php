@@ -30,15 +30,15 @@
 	</script>
     <header>
         <div class="topnav">
-	    	<div class="kartoffel"><img src="kartoffelpc.png" style="width:4vw;height:4vw;" /></div>
+	    		<a href="kartoffelpc.png"><img src="kartoffelpc.png" style="width:4vw;height:4vw;"></a>
         	<a href="./login/login.php">
-				<?php
-					echo($achne);
-				?>
-			</a>
+						<?php
+							echo($achne);
+						?>
+					</a>
         	<a href="projects.html"><img src="statistics.png" style="width:4vw;height:4vw;"></a>
-			<a href="settings.html"><img src="settings.png" style="width:4vw;height:4vw;"></a>
-		</div>
+					<a href="settings.html"><img src="settings.png" style="width:4vw;height:4vw;"></a>
+				</div>
     </header>
 		<div id="aha">aha</div>
 		<form>

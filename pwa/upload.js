@@ -3,11 +3,11 @@ document.addEventListener("submit", uploady);
 function uploady() {
   data = document.getElementById('data');
   var datatype;
-  if (typeof data == number & data > 30 & data < 200) {
+  if (typeof data == "number" & data > 30 & data < 200) {
     datatype = "Gewicht";
-  } else if (typeof data == number & data > 100) {
+  } else if (typeof data == "number" & data > 100) {
     datatype = "Kilokalorien";
-  } else if (typeof data == number & data < 6) {
+  } else if (typeof data == "number" & data < 6) {
     datatype = "Flüssigkeitszufuhr";
   } else {
     datatype = "Kraft";
