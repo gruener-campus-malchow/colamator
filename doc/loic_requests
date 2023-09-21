@@ -1,0 +1,5 @@
+| Request            | Methode  | SQL-Query                   |   |   |   |   |   |   |   |
+|--------------------|----------|-----------------------------|---|---|---|---|---|---|---|
+| /api/DataList      | Get      | SELECT * FROM DataList      |   |   |   |   |   |   |   |
+| /api/UserKeys      | Update   | UPDATE* FROM UserKeys       |   |   |   |   |   |   |   |
+| /api/UserProfiles  | Delete   | DELETE * From UserProfiles  |   |   |   |   |   |   |   |
