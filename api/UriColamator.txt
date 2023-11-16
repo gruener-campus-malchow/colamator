@@ -1,0 +1,40 @@
+colamator.de
+
+--- User
+
+/user/
+
+/user/?id=$id
+
+/user/?email=$email
+
+/user/username
+
+--- Group
+
+/group/
+
+/group/?groupname=$groupname
+
+/group/?id=$groupid
+
+/group/groupname
+
+--- Values
+
+/group/groupname/?timestamp=1h
+
+/group/groupname/valueid
+
+--- Typs
+
+/typs/
+
+/typs/?typname=$name
+
+/typs/typename
+
+/typs/?id=$id
+
+/typs/id
+
