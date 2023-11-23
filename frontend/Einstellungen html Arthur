@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>Einstellungen</h1>
+<form>
+  <label for="fname">
+  First Benutzername:</label><br>
+  <input type="text" id="fname" name="fname" value="Max 	Mustermann"><br>
+  <label for="lname">
+Passwort:</label><br>
+  <input type="text" id="lname" name="lname" value="12345678">
+  Email<br>
+  <input type="text" id="lname" name="lname" value="maxmustermann@ente.com"
+>
+<p>Profielbild</p>
+<p>Benachrichtigungen</p>
+<p>(Hintergrundfarbe)</p>
+<p></p>
+<p></p>
+  
+
+</body>
+</html>
