@@ -1,15 +1,16 @@
 <?php
 	session_start();
 	if ($_SESSION) {
-		$achne = $_SESSION["username"];
+		$username = $_SESSION["username"];
 	} else {
-		$achne = "Unknown";
+		$username = "Unknown";
 	}
 ?>
 <!DOCTYPE html>
 <head>
 	<link rel="manifest" href="manifest.json">
 	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta charset="UTF-8" />
 	<meta name="theme-color" content="#1ac6ff">
@@ -17,12 +18,12 @@
 	<link rel="apple-touch-icon" href="defeat.png">
 	<script language="javascript" type="module" src="index.js"></script>
 	<script language="javascript" type="module" src="upload.js"></script>
- </head>
+</head>
 <body>
 	<script type="module">
 		if ('serviceWorker' in navigator) {
 			try {
-				navigator.serviceWorker.register('./sw.js');
+				navigator.serviceWorker.register('./pwa/sw.js');
 			} catch (error) {
 				console.error(`Registration failed with ${error}`);
 			}
@@ -30,20 +31,14 @@
 	</script>
     <header>
         <div class="topnav">
-	    		<a href="kartoffelpc.png"><img src="kartoffelpc.png" style="width:4vw;height:4vw;"></a>
+	    	<a href="kartoffelpc.png"><img src="kartoffelpc.png" style="width:4vw;height:4vw;"></a>
         	<a href="./login/login.php">
-						<?php
-							echo($achne);
-						?>
-					</a>
-        	<a href="projects.html"><img src="statistics.png" style="width:4vw;height:4vw;"></a>
-					<a href="settings.html"><img src="settings.png" style="width:4vw;height:4vw;"></a>
-				</div>
+				<?php
+					echo($username);
+				?>
+			</a>
+        	<a href="statistics.html"><span class="material-symbols-outlined">bar_chart</span></a>
+		    <a href="settings.html"><span class="material-symbols-outlined">settings</span></a>
+		</div>
     </header>
-		<div id="aha">aha</div>
-		<form>
-			<label for="data">Data</label><br>
-  			<input type="text" id="data" name="data">
-			<input type="submit" value="submit" id="upload">
-			</form>
 </body>
