@@ -45,6 +45,8 @@ var templateChatForm = (types) => {
     return result;
 };
 
+// utility functions
+
 function rendertypeOf(datatype) {
     if (datatype == "nil") {
         return "number";    
@@ -76,7 +78,7 @@ export function renderChat() {
     let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
     document.getElementById("input-message").type = rendertype;
 
-    document.getELementById("input-types").addEventListener("change", () => {
+    document.getElementById("input-types").addEventListener("change", () => {
         let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
         document.getElementById("input-message").type = rendertype;
     });
