@@ -29,7 +29,7 @@ var templateChatMessage = (user, content, comment = "") => {
 };
 
 var templateChatForm = (types) => {
-    let result = 
+    let result =
         `<form name="sendmessage" id="sendmessage" method="POST" action="#"> <!-- send message form -->
             <select name="input-type" id="input-types">`;
     for (let type in types) {
@@ -49,7 +49,7 @@ var templateChatForm = (types) => {
 
 function rendertypeOf(datatype) {
     if (datatype == "nil") {
-        return "number";    
+        return "number";
     } else {
         return "text";
     }
@@ -57,10 +57,8 @@ function rendertypeOf(datatype) {
 
 // build chat
 export function renderChat() {
-    if (document.cookie["site"]=="chat") {
-        return(false);
-    }
     document.cookie = 'site=chat';
+    window.history.pushState({}, null, null);
 
     // build page
     var header = document.getElementById("header");
@@ -72,7 +70,10 @@ export function renderChat() {
     var main = document.getElementById("main");
     main.appendChild(messages);
     main.innerHTML += templateChatForm(["null", "none", "nil"]);
+
+    // return to Main View
     document.getElementById("return").addEventListener("click", renderMain);
+    window.addEventListener("popstate", renderMain);
 
     // match input type of message with datatype
     let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
