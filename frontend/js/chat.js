@@ -6,6 +6,8 @@ This document creates the interface of all chats
 
 // template functions
 
+import { renderMain } from "./main.js";
+
 var templateChatHeader = (chatname) =>
     `<button id="return" style="font-family: Material Symbols Outlined">arrow_back</button>
      <h1 id="chatname">${chatname}</h1>`;
@@ -28,26 +30,72 @@ var templateChatMessage = (user, content, comment = "") => {
 
 var templateChatForm = (types) => {
     let result = 
-        `<form id="sendmessage" method="POST" action="#"> <!-- send message form -->
+        `<form name="sendmessage" id="sendmessage" method="POST" action="#"> <!-- send message form -->
             <select name="input-type" id="input-types">`;
     for (let type in types) {
         result +=
-                `<option></option>`;
+                `<option value="${types[type]}">${types[type]}</option>`;
     }
     result +=
             `</select>
-             <input id="input-message" placeholder="Daten eingeben">
-             <input type="text" id="input-commment" placeholder="Kommentar anfügen">
+             <input name="input-message" id="input-message" placeholder="Daten eingeben">
+             <input name="input-comment" id="input-comment" placeholder="Kommentar anfügen">
              <input type="submit" value="send" style="font-family: Material Symbols Outlined">
          </form>`;
     return result;
 };
 
-// build chat
-function renderChat() {
-    site = "chat";
+function rendertypeOf(datatype) {
+    if (datatype == "nil") {
+        return "number";    
+    } else {
+        return "text";
+    }
+}
 
-    document.getElementsByTagName("HEADER")[0].innerHTML = templateChatHeader("ME");
-    document.getElementsByTagName("MAIN")[0].innerHTML = templateChatMessage("Me", "Nothing");
-    document.getElementsByTagName("MAIN")[0].innerHTML += templateChatForm([]);
+// build chat
+export function renderChat() {
+    if (document.cookie["site"]=="chat") {
+        return(false);
+    }
+    document.cookie = 'site=chat';
+
+    // build page
+    var header = document.getElementById("header");
+    header.innerHTML = templateChatHeader("Selbstgespräch");
+
+    var messages = document.createElement("DIV");
+    messages.innerHTML = templateChatMessage("Ich", "Nichts");
+
+    var main = document.getElementById("main");
+    main.appendChild(messages);
+    main.innerHTML += templateChatForm(["null", "none", "nil"]);
+    document.getElementById("return").addEventListener("click", renderMain);
+
+    // match input type of message with datatype
+    let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
+    document.getElementById("input-message").type = rendertype;
+
+    document.getELementById("input-types").addEventListener("change", () => {
+        let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
+        document.getElementById("input-message").type = rendertype;
+    });
+
+    // send data to API
+    document.getElementById("sendmessage").addEventListener("submit", (event) => {
+        event.preventDefault();
+        let form = event.target;
+        /* fetch('#', {
+            method: 'POST',
+            body: JSON.stringify({
+                datatype: form["input-type"].value,
+                data: form["input-message"].value,
+                comment: form["input-comment"].value == "" ? null : form["input-comment"].value
+            })
+        })
+            .then(response => response.json())
+            .then(json => {
+                messages.innerHTML += templateChatMessage( ... );
+            }); */
+    });
 }
