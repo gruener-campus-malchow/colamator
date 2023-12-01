@@ -1,6 +1,8 @@
 # colamator
 Collaborative Measurement Network
 
+[![CodeQL](https://github.com/gruener-campus-malchow/colamator/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/gruener-campus-malchow/colamator/actions/workflows/github-code-scanning/codeql)
+
 ## Ziele
 
 * Eine (Traininigs-) Gruppe erhebt gemeinsam Daten und postet die in einem fortlaufenden Chat
