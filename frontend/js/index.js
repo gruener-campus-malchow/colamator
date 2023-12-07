@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", fill);
 function fill () {
     if (typeof site == 'undefined' && !document.cookie['site']) {
         main.renderMain();
+    }
+}
 
 // from same page (from any site in SPA) through history (https://developer.mozilla.org/en-US/docs/Web/API/Window/history)
 window.addEventListener("popstate", loadSiteState);
