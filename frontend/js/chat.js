@@ -4,9 +4,9 @@ DOCUMENT
 This document creates the interface of all chats
 */
 
-// template functions
-
 import { saveSiteState } from "./index.js";
+
+// template functions
 
 var templateChatHeader = (chatname) =>
     `<button id="return" style="font-family: Material Symbols Outlined">arrow_back</button>
@@ -85,18 +85,5 @@ export function renderChat() {
     // send data to API
     document.getElementById("sendmessage").addEventListener("submit", (event) => {
         event.preventDefault();
-        let form = event.target;
-        /* fetch('#', {
-            method: 'POST',
-            body: JSON.stringify({
-                datatype: form["input-type"].value,
-                data: form["input-message"].value,
-                comment: form["input-comment"].value == "" ? null : form["input-comment"].value
-            })
-        })
-            .then(response => response.json())
-            .then(json => {
-                messages.innerHTML += templateChatMessage( ... );
-            }); */
     });
 }

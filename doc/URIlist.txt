@@ -1,0 +1,9 @@
+https://schwarzbrotrock.org/gruppen/?attributEinerGruppe
+bs.: https://schwarzbrotrock.org/gruppen/?gruppen_id_
+### nach einer Gruppe Suchen mit der id als beispiel###       
+
+https://schwarzbrotrock.org/gruppen/          POST 
+### erstellt neue gruppe und gibt gruppen_id_ zurück
+
+
+https://schwarzbrotrock.org/gruppen/gruppen_id_
