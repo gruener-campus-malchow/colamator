@@ -6,7 +6,7 @@ This document creates the interface of all chats
 
 // template functions
 
-import { renderMain } from "./main.js";
+import { saveSiteState } from "./index.js";
 
 var templateChatHeader = (chatname) =>
     `<button id="return" style="font-family: Material Symbols Outlined">arrow_back</button>
@@ -57,8 +57,7 @@ function rendertypeOf(datatype) {
 
 // build chat
 export function renderChat() {
-    document.cookie = 'site=chat';
-    window.history.pushState({}, null, null);
+    saveSiteState('chat');
 
     // build page
     var header = document.getElementById("header");
@@ -72,8 +71,7 @@ export function renderChat() {
     main.innerHTML += templateChatForm(["null", "none", "nil"]);
 
     // return to Main View
-    document.getElementById("return").addEventListener("click", renderMain);
-    window.addEventListener("popstate", renderMain);
+    document.getElementById("return").addEventListener("click", () => { history.back() });
 
     // match input type of message with datatype
     let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
