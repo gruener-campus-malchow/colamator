@@ -4,6 +4,8 @@ DOCUMENT
 This document creates the interface of all chats
 */
 
+import { saveSiteState } from "./index.js";
+
 // template functions
 
 var templateChatHeader = (chatname) =>
@@ -27,27 +29,61 @@ var templateChatMessage = (user, content, comment = "") => {
 };
 
 var templateChatForm = (types) => {
-    let result = 
-        `<form id="sendmessage" method="POST" action="#"> <!-- send message form -->
+    let result =
+        `<form name="sendmessage" id="sendmessage" method="POST" action="#"> <!-- send message form -->
             <select name="input-type" id="input-types">`;
     for (let type in types) {
         result +=
-                `<option></option>`;
+                `<option value="${types[type]}">${types[type]}</option>`;
     }
     result +=
             `</select>
-             <input id="input-message" placeholder="Daten eingeben">
-             <input type="text" id="input-commment" placeholder="Kommentar anfügen">
+             <input name="input-message" id="input-message" placeholder="Daten eingeben">
+             <input name="input-comment" id="input-comment" placeholder="Kommentar anfügen">
              <input type="submit" value="send" style="font-family: Material Symbols Outlined">
          </form>`;
     return result;
 };
 
-// build chat
-function renderChat() {
-    site = "chat";
+// utility functions
 
-    document.getElementsByTagName("HEADER")[0].innerHTML = templateChatHeader("ME");
-    document.getElementsByTagName("MAIN")[0].innerHTML = templateChatMessage("Me", "Nothing");
-    document.getElementsByTagName("MAIN")[0].innerHTML += templateChatForm([]);
+function rendertypeOf(datatype) {
+    if (datatype == "nil") {
+        return "number";
+    } else {
+        return "text";
+    }
+}
+
+// build chat
+export function renderChat() {
+    saveSiteState('chat');
+
+    // build page
+    var header = document.getElementById("header");
+    header.innerHTML = templateChatHeader("Selbstgespräch");
+
+    var messages = document.createElement("DIV");
+    messages.innerHTML = templateChatMessage("Ich", "Nichts");
+
+    var main = document.getElementById("main");
+    main.appendChild(messages);
+    main.innerHTML += templateChatForm(["null", "none", "nil"]);
+
+    // return to Main View
+    document.getElementById("return").addEventListener("click", () => { history.back() });
+
+    // match input type of message with datatype
+    let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
+    document.getElementById("input-message").type = rendertype;
+
+    document.getElementById("input-types").addEventListener("change", () => {
+        let rendertype = rendertypeOf(document.forms["sendmessage"]["input-type"].value);
+        document.getElementById("input-message").type = rendertype;
+    });
+
+    // send data to API
+    document.getElementById("sendmessage").addEventListener("submit", (event) => {
+        event.preventDefault();
+    });
 }

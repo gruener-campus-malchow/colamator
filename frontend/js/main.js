@@ -1,12 +1,13 @@
 import { renderStats } from "./statistics.js";
 import { renderPP } from "./PP.js";
+import { saveSiteState } from "./index.js";
 
 export function renderMain() {
     if (site=='main') {
         return(false);
     }
     var site = 'main';
-    document.cookie = 'site=main';
+    saveSiteState('main');
     let head = document.getElementById('header');
     let body = document.getElementById('main');
     // Provisorisches PP, bevor wir echte PBs vond er API bekommen
