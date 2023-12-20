@@ -16,11 +16,7 @@ export function renderStats() {
     fetch('/api/succ.php', {
     method: 'GET',
     body: JSON.stringify({datatype: data})
-  }).then(response => response.json()).then(console.log);
- function btngen() {
-	var btn = document.createElement("BUTTON");
-	var text = document.createTextNode(datatype);
-	btn.appendChild(text);
-	var newbutton = document.getElementById("button");
-  	document.body.insertBefore(btn,newbutton);
-}
+  }).then(response => response.json()).then((datatype)=> { array.forEach(function(datatype) {
+   console.log(btn = document.createElement(datatype););
+}););}
+
