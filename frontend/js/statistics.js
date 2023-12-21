@@ -13,10 +13,14 @@ export function renderStats() {
      document.getElementById('return').addEventListener("click", renderMain);
 }
 
-    fetch('/api/succ.php', {
+    fetch('colamator/api/user/', {
     method: 'GET',
     body: JSON.stringify({datatype: data})
   }).then(response => response.json()).then((datatype)=> { array.forEach(function(datatype) {
-   console.log(btn = document.createElement(datatype););
+  button = document.createElement('button');
+  button.id = datatype;
+  button.innerHTML = 'Your Mom '+datatype;
+  console.log(button);
+  document.body.appendChild(button);
 }););}
 
