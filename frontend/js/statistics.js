@@ -1,4 +1,4 @@
-import { saveSiteState } from "./index.js";
+import { saveSiteState,cleanseSite } from "./index.js";
 import { renderMain } from './main.js';
 
 export function renderStats() {
@@ -9,8 +9,7 @@ export function renderStats() {
     saveSiteState('stats');
     let head = document.getElementById('header');
     let body = document.getElementById('main');
-    head.innerHTML = '';
-    body.innerHTML = '';    
+    cleanseSite(head,body);  
     body.innerHTML='<button id="return" style="font-family: Material Symbols Outlined">arrow_back</button><h1>Statistiken</h1>';
      document.getElementById('return').addEventListener("click", renderMain);
 
