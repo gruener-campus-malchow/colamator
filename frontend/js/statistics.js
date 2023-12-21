@@ -1,10 +1,10 @@
-import { renderMain } from "./main.js";
+import { saveSiteState } from "./index.js";
 export function renderStats() {
     if (site=='stats' && document.cookie('site')=='stats') {
         return(false);
     }
     var site = 'stats';
-    document.cookie = 'site=stats';
+    saveSiteState('stats');
     let head = document.getElementById('header');
     let body = document.getElementById('main');
     body.innerHTML='<!DOCTYPE html>
