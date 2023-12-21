@@ -6,7 +6,7 @@ graph ER {
 
   node [shape=box]; types; values; gatherers;
 
-  node [shape=ellipse];  name0; username; label; comment; content; timestamp; status; is_standard;
+  node [shape=ellipse];  name0; username; label; comment; content; timestamp; status; is_standard; groupID;
 
   node [shape=diamond,style=filled,color=lightgrey] {"references"; "gathers"} 
 
@@ -26,6 +26,7 @@ graph ER {
   status -- gatherers;
   username [label=<<u>username</u>>];
   status [label="last seen"];
+  groupID -- values;
 
  // types -- "classifies" [label="1",len=1.00];
  // values -- "classifies" [label="n",len=1.00];

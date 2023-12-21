@@ -16,8 +16,13 @@ content BLOB,
 is_standard INTEGER,
 typeID VARCHAR(200) NOT NULL,
 gathererID VARCHAR(200) NOT NULL,
+groupID VARCHAR(200) NOT NULL,
 CONSTRAINT `fk_user_values_to_type`
     FOREIGN KEY (typeID) REFERENCES types(type_name)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+CONSTRAINT `fk_user_values_to_groups`
+    FOREIGN KEY (groupID) REFERENCES groups_universe(groupID)
     ON DELETE CASCADE
     ON UPDATE RESTRICT,
 CONSTRAINT `fk_user_values_to_gatherer`
