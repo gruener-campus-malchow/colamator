@@ -22,6 +22,6 @@ export function renderStats() {
   button.id = username['username'];
   button.innerHTML = 'Your Mom '+username['username'];
   console.log(button);
-  document.body.appendChild(button);
+  body.appendChild(button);
 });});
 }
