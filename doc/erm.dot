@@ -9,11 +9,11 @@ graph ER {
     //extraindividual attributes
     node [shape=ellipse]{  groupPK; group_name; group_description; user_name; password_hash; mail;}
     //relationships
-    node [shape=diamond,style=filled,color=lightgrey] {"references"; "gathers"; "is"; "memberships"; "published in"} 
+    node [shape=diamond,style=filled,color=lightgrey] {"references"; "gathers"; "memberships"; "published in"} 
     //extraindividual entities
     node [shape=box, color=lightblue] {"group"; user; "extraindividual Entities"}
     // individual Entities
-    node [shape=box color=pink]{ types; values; gatherers; "individual Entities"};
+    node [shape=box color=pink]{ types; values; "individual Entities"};
     
     user_name [label=<<u>user_name</u>>];
     groupPK  [label=<<u>group_pk</u>>];
@@ -22,6 +22,7 @@ graph ER {
     label -- types;
     name0 [label=<<u>name</u>>];
     
+    user [label = "gatherer"]
     
     content -- values;
     is_standard -- values;
@@ -30,7 +31,7 @@ graph ER {
     
     timestamp [label=<<u>timestamp</u>>];
     
-    status -- gatherers;
+    status -- user;
     
     status [label="last seen"];
     groupID -- values;
@@ -38,7 +39,7 @@ graph ER {
     types -- "references" [label="1",len=1.00];
     values -- "references" [label="n",len=1.00];
     
-    gatherers -- "gathers" [label="1",len=1.00];
+    user -- "gathers" [label="1",len=1.00];
     values -- "gathers" [label="n",len=1.00];
     
     "group" -- groupPK;
@@ -48,9 +49,6 @@ graph ER {
     user -- password_hash; 
     user -- mail;
     user -- user_name;
-    
-    is -- user [label="1",len=1.00];
-    is -- gatherers [label="n",len=1.00];
     
     memberships -- group [label="n",len=1.00];
     memberships -- user [label="m",len=1.00];
