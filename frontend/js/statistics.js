@@ -14,13 +14,13 @@ export function renderStats() {
     body.innerHTML='<button id="return" style="font-family: Material Symbols Outlined">arrow_back</button><h1>Statistiken</h1>';
      document.getElementById('return').addEventListener("click", renderMain);
 
-    fetch('colamator/api/user/', {
+    fetch('../api/user/', {
     method: 'GET',
-    body: JSON.stringify({dataype: data})
-  }).then(response => response.json()).then((datatype)=> { array.forEach(function(datatype) {
-  button = document.createElement('button');
-  button.id = datatype;
-  button.innerHTML = 'Your Mom '+datatype;
+    body: JSON.stringify()
+  }).then(response => response.json()).then((user)=> { user.forEach(function(username) {
+  let button = document.createElement('button');
+  button.id = username['username'];
+  button.innerHTML = 'Your Mom '+username['username'];
   console.log(button);
   document.body.appendChild(button);
 });});
