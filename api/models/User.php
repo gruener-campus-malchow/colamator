@@ -47,4 +47,21 @@ class User extends Model
 					);';
 		$this->api_response($this->db->query($createTypesSQL));
 	}
+	public function deleteSingle($identifier)
+	{
+		// call parent function to delete user
+		parent::deleteSingle($identifier);
+
+		// prevent SQL injection
+		$query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? OR TABLE_NAME = ? LIMIT 2;";
+		// if table doesn't exist, return a 404
+		if (!$this->db->query($query, [$identifier . '_types', $identifier . '_values'])) {
+			$this->api_response('Item Does Not Exist', 404);
+		} else {
+			$deleteTypesSQL = 'DROP TABLE ' . $identifier . '_types;';
+			$this->api_response($this->db->query($deleteTypesSQL));
+			$deleteValuesSQL = 'DROP TABLE ' . $identifier . '_values;';
+			$this->api_response($this->db->query($deleteValuesSQL));
+		}
+	}
 }
