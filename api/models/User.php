@@ -38,20 +38,20 @@ class User extends Model
 						ON DELETE CASCADE
 						ON UPDATE RESTRICT
 					);";
-		$this->api_response($this->db->query($createSQL, $params));
+		$this->api_response($this->db->query($createSQL));
 		
 		// create user gatherer table
 		$createSQL="CREATE TABLE " . $user_id . "_gatherers (
 					username VARCHAR(200) PRIMARY KEY,
 					last_seen INTEGER DEFAULT CURRENT_TIMESTAMP
 					);";
-		$this->api_response($this->db->query($createSQL, $params));
+		$this->api_response($this->db->query($createSQL));
 		
 		// create user type table
 		$createSQL="CREATE TABLE " . $user_id . "_types (
 					type_name VARCHAR(200) PRIMARY KEY,
 					label VARCHAR(200)
 					);";
-		$this->api_response($this->db->query($createSQL, $params));
+		$this->api_response($this->db->query($createSQL));
 	}
 }
