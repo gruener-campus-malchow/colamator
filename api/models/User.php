@@ -2,10 +2,10 @@
 
 class User extends Model
 {
-	protected $name = 'user';
+	protected $name = 'gatherer';
 	protected $id = 'id';
-	protected $searchable = ['username'];
-	protected $insertable = ['password_hash', 'username'];
+	protected $searchable = ['username', 'last_seen'];
+	protected $insertable = ['password_hash', 'username', 'mail'];
 
 	public function createSingle($data)
 	{
