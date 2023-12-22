@@ -23,4 +23,20 @@ class Tables extends Model
 
 		}
 	}
+	public function createSingle($data)
+	{
+		return $this->api_response('Request Method Is Not Implemented By The Target Resource', 405);
+	}
+	public function updateSingle($identifier, $data)
+	{
+		return $this->api_response('Request Method Is Not Implemented By The Target Resource', 405);
+	}
+	public function replaceSingle($identifier, $data)
+	{
+		return $this->api_response('Request Method Is Not Implemented By The Target Resource', 405);
+	}
+	public function deleteSingle($identifier)
+	{
+		return $this->api_response('Request Method Is Not Implemented By The Target Resource', 405);
+	}
 }
