@@ -1,8 +1,0 @@
-| Request    | Methode | SQL Query                                                 |   |   |   |   |   |   |   |
-|------------|---------|-----------------------------------------------------------|---|---|---|---|---|---|---|
-| /user/     | GET     | SELECT * FROM user                                        |   |   |   |   |   |   |   |
-| /user/     | POST    | CREAT TABEL username(attribute)                           |   |   |   |   |   |   |   |
-| /chat/     | GET     | SELECT * FROM chatname                                    |   |   |   |   |   |   |   |
-| /chat/     | POST    | INSERT INTO chatname (columname ...) VALUES (vaules ...); |   |   |   |   |   |   |   |
-| /datatype/ | GET     | SELECT * FROM datatype                                    |   |   |   |   |   |   |   |
-| /datatype/ | POST    | INSERT INTO datatype (columname ...) VALUES (value);      |   |   |   |   |   |   |   |

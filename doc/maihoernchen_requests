@@ -1,9 +1,0 @@
-| **Request**                          | **Method** | **SQL**                                                                                   |
-|--------------------------------------|------------|-------------------------------------------------------------------------------------------|
-| /api/user/                           | GET        | SELECT * FROM user;                                                                       |
-| /api/user/username                   | GET        | SELECT * FROM user WHERE username="username";                                             |
-| /api/datatypes/                      | GET        | SELECT * FROM datatypes;                                                                  |
-| /api/datatypes/name                  | GET        | SELECT * FROM datatypes WHERE name="name";                                                |
-| /api/collaborations/                 | GET        | SELECT * FROM collaborations;                                                             |
-| /api/collaborations/hash             | GET        | SELECT * FROM collaborations WHERE id="hash";                                             |
-| user@example.com/api/collaborations/ | POST       | INSERT INTO collaborations (name,description, picture) VALUES (name,description,picture); |
