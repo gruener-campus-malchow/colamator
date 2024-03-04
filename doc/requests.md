@@ -1,0 +1,82 @@
+| **Request**                          | **Method** | **SQL**                                                                                   |
+|--------------------------------------|------------|-------------------------------------------------------------------------------------------|
+| /api/user/                           | GET        | SELECT * FROM user;                                                                       |
+| /api/user/username                   | GET        | SELECT * FROM user WHERE username="username";                                             |
+| /api/datatypes/                      | GET        | SELECT * FROM datatypes;                                                                  |
+| /api/datatypes/name                  | GET        | SELECT * FROM datatypes WHERE name="name";                                                |
+| /api/collaborations/                 | GET        | SELECT * FROM collaborations;                                                             |
+| /api/collaborations/hash             | GET        | SELECT * FROM collaborations WHERE id="hash";                                             |
+| user@example.com/api/collaborations/ | POST       | INSERT INTO collaborations (name,description, picture) VALUES (name,description,picture); |
+| Request            | Methode  | SQL-Query                   |   |   |   |   |   |   |   |
+|--------------------|----------|-----------------------------|---|---|---|---|---|---|---|
+| /api/DataList      | Get      | SELECT * FROM DataList      |   |   |   |   |   |   |   |
+| /api/UserKeys      | Update   | UPDATE* FROM UserKeys       |   |   |   |   |   |   |   |
+| /api/UserProfiles  | Delete   | DELETE * From UserProfiles  |   |   |   |   |   |   |   |
+| Request    | Methode | SQL Query                                                 |   |   |   |   |   |   |   |
+|------------|---------|-----------------------------------------------------------|---|---|---|---|---|---|---|
+| /user/     | GET     | SELECT * FROM user                                        |   |   |   |   |   |   |   |
+| /user/     | POST    | CREAT TABEL username(attribute)                           |   |   |   |   |   |   |   |
+| /chat/     | GET     | SELECT * FROM chatname                                    |   |   |   |   |   |   |   |
+| /chat/     | POST    | INSERT INTO chatname (columname ...) VALUES (vaules ...); |   |   |   |   |   |   |   |
+| /datatype/ | GET     | SELECT * FROM datatype                                    |   |   |   |   |   |   |   |
+| /datatype/ | POST    | INSERT INTO datatype (columname ...) VALUES (value);      |   |   |   |   |   |   |   |
+https://schwarzbrotrock.org/gruppen/?attributEinerGruppe
+bs.: https://schwarzbrotrock.org/gruppen/?gruppen_id_
+### nach einer Gruppe Suchen mit der id als beispiel###       
+
+https://schwarzbrotrock.org/gruppen/          POST 
+### erstellt neue gruppe und gibt gruppen_id_ zurück
+
+
+https://schwarzbrotrock.org/gruppen/gruppen_id_
+| **Pfad**                                                                                                                                                                                            | **HTTP-Methode** | **SQL-Query**                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------------------------------------------------|
+| /gatherer/%name%*(/)*                                                                                                                                                                               | GET              | SELECT username, last_seen FROM gatherer WHERE username=%name%               |
+| /gatherer/%name%/update?%key%=%value% **o.** /gatherer/%name%/update **o.** /gatherer/%name%                                                                                                        | PATCH            | UPDATE gatherer SET %key%=%value% WHERE username=%name%                      |
+| /values/                                                                                                                                                                                            | GET              | SELECT timestamp, name, blob, type_referenced, comment, gatherer FROM values |
+| /values/new **o.** /values/                                                                                                                                                                         | POST             | INSERT INTO values VALUES (%body%)                                           |
+| /values/delete **o.** /values/delete?timestamp=%timestamp%&name=%name% **o.** /values/?timestamp=%timestamp%&name=%name% **o.** /values/%timestamp%/%name%/delete **o.** /values/%timestamp%/%name% | DELETE           | DELETE FROM values WHERE timestamp=%timestamp% AND name=%name%               |
+| /types/                                                                                                                                                                                             | GET              | SELECT name FROM types                                                       |
+| /types/%name%*(/)*                                                                                                                                                                                  | GET              | SELECT * FROM types WHERE name=%name%                                        |
+| /types/new **o.** /types/                                                                                                                                                                           | POST             | INSERT INTO types VALUES (%body%)                                            |
+| /types/%name%/remove **o.** /types/%name%                                                                                                                                                           | DELETE           | DELETE FROM types WHERE name=%name%                                          |
+| Request     | Methode | SQL-Query           |
+|-------------|---------|---------------------|
+| /api/items/ | GET     | SELECT * FROM items |
+| ...         | POST    | ...                 |
+
+| **Request**                          | **Method** | **SQL**                                                                                   |
+|--------------------------------------|------------|-------------------------------------------------------------------------------------------|
+| /api/user/                           | GET        | SELECT * FROM user;                                                                       |
+| /api/user/username                   | GET        | SELECT * FROM user WHERE username="username";                                             |
+| /api/datatypes/                      | GET        | SELECT * FROM datatypes;                                                                  |
+| /api/datatypes/name                  | GET        | SELECT * FROM datatypes WHERE name="name";                                                |
+| /api/collaborations/                 | GET        | SELECT * FROM collaborations;                                                             |
+| /api/collaborations/hash             | GET        | SELECT * FROM collaborations WHERE id="hash";                                             |
+| user@example.com/api/collaborations/ | POST       | INSERT INTO collaborations (name,description, picture) VALUES (name,description,picture); |
+| /gatherers/1 | ```GET```    | ```SELECT * FROM gatherers WHERE id=1;```               |
+| /gatherers/1 | ```PATCH```  | ```INSERT value_to_change INTO gatherers WHERE id=1;``` |
+| /groups/     | ```GET```    | ```SELECT * FROM groups;```                             |
+| /groups/     | ```POST```   | ```INSERT INTO groups VALUES;```                        |
+| /datatypes/  | ```GET```    | ```SELECT * FROM datatypes;```                          |
+| /datatypes/  | ```POST```   | ```INSERT INTO datatypes VALUES;```                     |
+| Request      | Method | SQL                                               |
+|--------------|--------|---------------------------------------------------|
+| /gatherers/1 | ```GET```    | ```SELECT * FROM gatherers WHERE id=1;```               |
+| /gatherers/1 | ```PATCH```  | ```INSERT value_to_change INTO gatherers WHERE id=1;``` |
+| /groups/     | ```GET```    | ```SELECT * FROM groups;```                             |
+| /groups/     | ```POST```   | ```INSERT INTO groups VALUES;```                        |
+| /datatypes/  | ```GET```    | ```SELECT * FROM datatypes;```                          |
+| /datatypes/  | ```POST```   | ```INSERT INTO datatypes VALUES;```                     |
+| Request             | Method | Sql-Query                                      | 
+|---------------------|--------|------------------------------------------------|
+| /api/datatypes/     | GET    | SELECT * FROM datatypes                        |   
+|                     | POST   | INSERT INTO datatypes VALUES                   |   
+| /api/datatypes/1typ | DELETE | DELETE * FROM datatyp Where name = 1typ        |   
+| /api/values/      | GET    | SELECT * FROM values                         |   
+|                     | POST   | INSERT INTO values VALUES                    |   
+| /api/values/1value  | PATCH  | UPDATE values SET ...=...  Where name = 1value |   
+|                     | DELETE | DELETE * FROM values Where name = 1value     |  
+| /api/groups/        | POST   | INSERT INTO groups VALUES                      |   
+| /api/groups/1group  | PATCH  | UPDATE groups SET ...=...  Where name = 1group |  
+| /api/groups/1group  | DELTE  | DELETE * FROM groups Where name = 1group       |   
