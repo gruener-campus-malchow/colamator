@@ -5,7 +5,7 @@ graph ER {
     
     
     //individual attributes    
-    node [shape=ellipse] { name0; label; comment; content; timestamp; status; is_standard; groupID;}
+    node [shape=ellipse] { UserID; interpretation; id; name0; label; comment; content; timestamp; status; is_standard; groupID;}
     //extraindividual attributes
     node [shape=ellipse]{  groupPK; group_name; group_description; user_name; password_hash; mail;}
     //relationships
@@ -15,12 +15,11 @@ graph ER {
     // individual Entities
     node [shape=box color=pink]{ types; values; "individual Entities"};
     
-    user_name [label=<<u>user_name</u>>];
+    UserID [label=<<u>UserID</u>>];
     groupPK  [label=<<u>group_pk</u>>];
-    
-    name0 -- types;
-    label -- types;
-    name0 [label=<<u>name</u>>];
+    id [label=<<u>id</u>>];
+   
+    name0 [label=name];
     
     user [label = "gatherer"]
     
@@ -42,6 +41,11 @@ graph ER {
     user -- "gathers" [label="1",len=1.00];
     values -- "gathers" [label="n",len=1.00];
     
+    types -- label;
+    types -- name0;
+    types -- id;
+    types -- interpretation;
+    
     "group" -- groupPK;
     "group" -- group_name;
     "group" -- group_description;
@@ -49,6 +53,7 @@ graph ER {
     user -- password_hash; 
     user -- mail;
     user -- user_name;
+    user -- UserID;
     
     memberships -- group [label="n",len=1.00];
     memberships -- user [label="m",len=1.00];
