@@ -30,9 +30,17 @@ loggt einen benutzer aus
 
 response: `"logout successful"`
 
-### GET /api/datatypes/ [R]
+### POST /api/datatypes/username [R]
 
-Liefert Datentypen, die für einen Benutzer festegelegt sind
+body: `{"username":"maxmustermann", "name":"Mittagessen", "label":"Gewicht vom Mittagessen"}` \
+
+Definiert Datentypen, die für den Benutzer (username) festegelegt sind
+
+response: `[{…}, …]`
+
+### GET /api/datatypes/username [R]
+
+Liefert Datentypen, die für den Benutzer (username) festegelegt sind
 
 response: `[{…}, …]`
 

@@ -1,0 +1,45 @@
+CREATE TABLE type (
+typeID INT PRIMARY KEY AUTO_INCREMENT,
+type_name VARCHAR(200),
+label VARCHAR(200),
+interpretation BLOB
+);
+
+CREATE TABLE gatherer (
+gathererID INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(200),
+last_seen INTEGER DEFAULT CURRENT_TIMESTAMP,
+mail VARCHAR(200),
+password_hash CHAR(256)
+);
+
+CREATE TABLE 'value' (
+value_comment TEXT,
+timestamp INTEGER DEFAULT CURRENT_TIMESTAMP PRIMARY KEY,
+content BLOB,
+is_standard BOOLEAN,
+typeID VARCHAR(200) NOT NULL,
+gathererID VARCHAR(200) NOT NULL,
+groupID CHAR(16) NOT NULL,
+CONSTRAINT `fk_user_values_to_type`
+    FOREIGN KEY (typeID) REFERENCES type(typeID)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+CONSTRAINT `fk_user_values_to_groups`
+    FOREIGN KEY (groupID) REFERENCES 'group'(groupID)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+CONSTRAINT `fk_user_values_to_gatherer`
+    FOREIGN KEY (gathererID) REFERENCES gatherer(gathererID)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT
+);
+
+CREATE TABLE 'group' (
+groupID INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(200) NOT NULL,
+description TEXT,
+pk_64 CHAR(16) PRIMARY KEY,
+);
+
+

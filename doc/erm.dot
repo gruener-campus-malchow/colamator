@@ -1,41 +1,67 @@
 graph ER {
 
-  layout=neato;
-   //overlap = scale;
-   overlap = false;
-
-  node [shape=box]; types; values; gatherers;
-
-  node [shape=ellipse];  name0; username; label; comment; content; timestamp; status; is_standard;
-
-  node [shape=diamond,style=filled,color=lightgrey] {"references"; "gathers"} 
-
-  name0 -- types;
-  label -- types;
-  name0 [label=<<u>name</u>>];
-
-  //name1 -- values;
-  content -- values;
-  is_standard -- values;
-  timestamp -- values;
-  comment -- values;
-  //name1 [label=<<u>name</u>>];
-  timestamp [label=<<u>timestamp</u>>];
-
-  username -- gatherers;
-  status -- gatherers;
-  username [label=<<u>username</u>>];
-  status [label="last seen"];
-
- // types -- "classifies" [label="1",len=1.00];
- // values -- "classifies" [label="n",len=1.00];
-
-  types -- "references" [label="1",len=1.00];
-  values -- "references" [label="n",len=1.00];
-
-  gatherers -- "gathers" [label="1",len=1.00];
-  values -- "gathers" [label="n",len=1.00];
-
-  label = "\n\nUSER DATABASE\nCollaborative Measurement Network";
-  fontsize=14;
+    layout = neato;
+    overlap = false;
+    
+    
+    //individual attributes    
+    node [shape=ellipse] { UserID; interpretation; id; name0; label; comment; content; timestamp; status; is_standard; groupID;}
+    //extraindividual attributes
+    node [shape=ellipse]{  groupPK; group_name; group_description; user_name; password_hash; mail;}
+    //relationships
+    node [shape=diamond,style=filled,color=lightgrey] {"references"; "gathers"; "memberships"; "published in"} 
+    //extraindividual entities
+    node [shape=box, color=lightblue] {"group"; user; "extraindividual Entities"}
+    // individual Entities
+    node [shape=box color=pink]{ types; values; "individual Entities"};
+    
+    UserID [label=<<u>UserID</u>>];
+    groupPK  [label=<<u>group_pk</u>>];
+    id [label=<<u>id</u>>];
+   
+    name0 [label=name];
+    
+    user [label = "gatherer"]
+    
+    content -- values;
+    is_standard -- values;
+    timestamp -- values;
+    comment -- values;
+    
+    timestamp [label=<<u>timestamp</u>>];
+    
+    status -- user;
+    
+    status [label="last seen"];
+    groupID -- values;
+    
+    types -- "references" [label="1",len=1.00];
+    values -- "references" [label="n",len=1.00];
+    
+    user -- "gathers" [label="1",len=1.00];
+    values -- "gathers" [label="n",len=1.00];
+    
+    types -- label;
+    types -- name0;
+    types -- id;
+    types -- interpretation;
+    
+    "group" -- groupPK;
+    "group" -- group_name;
+    "group" -- group_description;
+    
+    user -- password_hash; 
+    user -- mail;
+    user -- user_name;
+    user -- UserID;
+    
+    memberships -- group [label="n",len=1.00];
+    memberships -- user [label="m",len=1.00];
+    
+    "published in" -- values [label="n",len=1.00];
+    "published in" -- group [label="1",len=1.00];
+    
+    label = "\n\nDATABASE of Collaborative Measurement Network";
+    
+    fontsize=14;
 }
